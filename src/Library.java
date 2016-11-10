@@ -301,24 +301,26 @@ public class Library implements Serializable {
     return (OPERATION_FAILED);
   }
 
-  private boolean yearApart(Calendar date1, Calendar date2) {
-    return ((date2.getTimeInMillis() - date1.getTimeInMillis()) / 86400000) > 365;
-  }
-
+  /**
+   * Returns the number of days a book has been checked out
+   *
+   * @param date the date of when the book was checked out
+   * @return the number of days as an integer
+   */
   private int daysElapsedSince(Calendar date) {
     return (int) ((System.currentTimeMillis() - date.getTimeInMillis()) / 86400000);
   }
 
+  /**
+   * Returns the fine that has been accrued
+   * @param loanableItem The item that was checked out
+   * @return the amount of the fine
+   */
   public double computeFine(LoanableItem loanableItem) {
     double fine = 0.0;
     Calendar dueDate = loanableItem.getDueDate();
     if (System.currentTimeMillis() > dueDate.getTimeInMillis()) {
-      Calendar acquisitionDate = loanableItem.getAcquisitionDate();
-      if (yearApart(acquisitionDate, dueDate)) {
-        fine = 0.15 + 0.05 * daysElapsedSince(dueDate);
-      } else {
-        fine = 0.25 + 0.1 * daysElapsedSince(dueDate);
-      }
+      fine = 0.15 + 0.05 * daysElapsedSince(dueDate);
       if (loanableItem.hasHold()) {
         fine *= 2;
       }
