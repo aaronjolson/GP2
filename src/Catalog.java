@@ -47,9 +47,9 @@ public class Catalog extends ItemList<LoanableItem, String> {
   }
 
   /**
-   * Removes a book from the catalog
+   * Removes a loanableItem from the catalog
    *
-   * @param loanableItemId book id
+   * @param loanableItemId loanableItem id
    * @return true iff book could be removed
    */
   public boolean removeLoanableItem(String loanableItemId) {
@@ -64,7 +64,7 @@ public class Catalog extends ItemList<LoanableItem, String> {
   /**
    * Inserts a LoanableItem into the collection
    *
-   * @param loanableItem the book to be inserted
+   * @param loanableItem the loanableItem to be inserted
    * @return true iff the book could be inserted. Currently always true
    */
   public boolean insertLoanableItem(LoanableItem loanableItem) {
