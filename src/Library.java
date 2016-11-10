@@ -268,7 +268,7 @@ public class Library implements Serializable {
   }
 
   /**
-   * Removes a specific book from the catalog
+   * Removes a specific item from the catalog
    *
    * @param itemId id of the item
    * @return a code representing the outcome

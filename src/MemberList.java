@@ -67,6 +67,21 @@ public class MemberList extends ItemList<Member, String> {
     return super.add(member);
   }
 
+  /**
+   * Removes a member from the memberList
+   *
+   * @param memberId member id
+   * @return true iff member could be removed
+   */
+  public boolean removeMember(String memberId) {
+    Member member = super.search(memberId);
+    if (member == null) {
+      return false;
+    } else {
+      return super.remove(member);
+    }
+  }
+
   /*
    * Supports serialization
    *

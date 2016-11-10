@@ -49,10 +49,12 @@ public class UserInterface {
   private static final int PROCESS_HOLD = 9;
   private static final int GET_TRANSACTIONS = 10;
   private static final int PAY_FINES = 11;
-  private static final int SAVE = 12;
-  private static final int RETRIEVE = 13;
-  private static final int PRINT_FORMATTED = 14;
-  private static final int HELP = 15;
+  private static final int DISPLAY_ALL_OVERDUE_ITEMS = 12;
+  private static final int REMOVE_MEMBER = 13;
+  private static final int SAVE = 14;
+  private static final int RETRIEVE = 15;
+  private static final int PRINT_FORMATTED = 16;
+  private static final int HELP = 17;
 
   /**
    * Made private for singleton pattern. Conditionally looks for any saved
@@ -472,6 +474,14 @@ public class UserInterface {
 
   }
 
+  public void displayAllOverdueItems() {
+
+  }
+
+  public void removeMember() {
+
+  }
+
   /**
    * Method to be called for saving the Library object. Uses the appropriate
    * Library method for saving.
@@ -553,6 +563,12 @@ public class UserInterface {
           break;
         case PAY_FINES:
           payFines();
+          break;
+        case DISPLAY_ALL_OVERDUE_ITEMS:
+          displayAllOverdueItems();
+          break;
+        case REMOVE_MEMBER:
+          removeMember();
           break;
         case SAVE:
           save();
