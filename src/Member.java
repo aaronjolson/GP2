@@ -115,7 +115,7 @@ public class Member implements Serializable, Matchable<String> {
     return (itemsBorrowed.listIterator());
   }
 
-  public double addFine(double fine, String titleId ){
+  public double addFine(double fine, String title){
     outstandingFines += fine;
     return fine;
   }
