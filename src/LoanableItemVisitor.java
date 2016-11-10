@@ -45,4 +45,32 @@ public interface LoanableItemVisitor {
 	 * @param periodical the Periodical to be processed
 	 */
 	public void visit(Periodical periodical);
+
+  /**
+   * This method processes Dvd objects
+   *
+   * @param dvd the Dvd to be processed
+   */
+  public void visit(Dvd dvd);
+
+  /**
+   * This method processes Camera objects
+   *
+   * @param camera the camera to be processed
+   */
+  public void visit(Camera camera);
+
+  /**
+   * This method processes Laptop objects
+   *
+   * @param laptop the Laptop to be processed
+   */
+  public void visit(Laptop laptop);
+
+  /**
+   * This method processes reservedBook objects
+   *
+   * @param reservedBook the Laptop to be processed
+   */
+  public void visit(ReservedBook reservedBook);
 }
