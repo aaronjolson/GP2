@@ -194,9 +194,9 @@ public class UserInterface {
     System.out.println(PAY_FINES + " to pay fines");
     System.out.println(DISPLAY_ALL_OVERDUE_ITEMS + " to display all overdue items");
     System.out.println(REMOVE_MEMBER + " to removed a member");
-    System.out.println(SAVE + " to  save data");
-    System.out.println(RETRIEVE + " to  retrieve");
-    System.out.println(PRINT_FORMATTED + " to  print items formatted");
+    System.out.println(SAVE + " to save data");
+    System.out.println(RETRIEVE + " to retrieve");
+    System.out.println(PRINT_FORMATTED + " to print items formatted");
     System.out.println(HELP + " for help");
   }
 
