@@ -112,7 +112,7 @@ public class Library implements Serializable {
    * Organizes the placing of a hold
    *
    * @param memberId member's id
-   * @param itemId item's id
+   * @param itemId   item's id
    * @param duration for how long the hold should be valid in days
    * @return indication on the outcome
    */
@@ -226,7 +226,7 @@ public class Library implements Serializable {
     return (item);
   }
 
-  public void payFines(String memberId, double fineAmount){
+  public void payFines(String memberId, double fineAmount) {
 
   }
 
@@ -290,15 +290,26 @@ public class Library implements Serializable {
     return (OPERATION_FAILED);
   }
 
+  public int removeMember(String memberId) {
+    Member member = memberList.search(memberId);
+    if (member == null) {
+      return (NO_SUCH_MEMBER);
+    }
+    if (memberList.removeMember(memberId)) {
+      return (OPERATION_COMPLETED);
+    }
+    return (OPERATION_FAILED);
+  }
+
   private boolean yearApart(Calendar date1, Calendar date2) {
     return ((date2.getTimeInMillis() - date1.getTimeInMillis()) / 86400000) > 365;
   }
 
   private int daysElapsedSince(Calendar date) {
-    return (int) ((System.currentTimeMillis() - date.getTimeInMillis())/86400000);
+    return (int) ((System.currentTimeMillis() - date.getTimeInMillis()) / 86400000);
   }
 
-  public double computeFine(LoanableItem loanableItem){
+  public double computeFine(LoanableItem loanableItem) {
     double fine = 0.0;
     Calendar dueDate = loanableItem.getDueDate();
     if (System.currentTimeMillis() > dueDate.getTimeInMillis()) {
@@ -337,10 +348,10 @@ public class Library implements Serializable {
     fine = computeFine(loanableItem);
     if (fine < 0) {
       member.addFine(fine, loanableItem.getTitle());
-      if(loanableItem.hasHold()){
-        return(ITEM_HAS_HOLD_FINE);
+      if (loanableItem.hasHold()) {
+        return (ITEM_HAS_HOLD_FINE);
       } else {
-        return(ITEM_HAS_FINE);
+        return (ITEM_HAS_FINE);
       }
     }
 
