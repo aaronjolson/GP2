@@ -38,6 +38,8 @@ public abstract class LoanableItem implements Matchable<String>, Serializable {
   private String id;
   protected Member borrowedBy;
   protected Calendar dueDate;
+  protected Calendar acquisitionDate;
+
   private List<Hold> holds = new LinkedList<Hold>();
 
   /**
@@ -62,9 +64,12 @@ public abstract class LoanableItem implements Matchable<String>, Serializable {
       return false;
     }
     dueDate = new GregorianCalendar();
+    acquisitionDate = new GregorianCalendar();
     borrowedBy = member;
     return true;
   }
+
+
 
   /**
    * Returns the title of the item
@@ -100,6 +105,10 @@ public abstract class LoanableItem implements Matchable<String>, Serializable {
    */
   public Calendar getDueDate() {
     return dueDate;
+  }
+
+  public Calendar getAcquisitionDate() {
+    return acquisitionDate;
   }
 
   /**

@@ -9,7 +9,6 @@ public class Periodical extends LoanableItem implements Serializable,
    * Creates a periodical with the given id, title, and author name
    *
    * @param title  book title
-   * @param author author name
    * @param id     book id
    */
   public Periodical(String title, String id) {

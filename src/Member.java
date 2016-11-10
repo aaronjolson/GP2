@@ -35,6 +35,7 @@ public class Member implements Serializable, Matchable<String> {
   private String address;
   private String phone;
   private String id;
+  private double outstandingFines;
   private static final String MEMBER_STRING = "M";
   private List<LoanableItem> itemsBorrowed = new LinkedList<LoanableItem>();
   private List<Hold> itemsOnHold = new LinkedList<Hold>();
@@ -112,6 +113,11 @@ public class Member implements Serializable, Matchable<String> {
    */
   public Iterator<LoanableItem> getLoanableItemsIssued() {
     return (itemsBorrowed.listIterator());
+  }
+
+  public double addFine(double fine, String titleId ){
+    outstandingFines += fine;
+    return fine;
   }
 
   /**
@@ -200,6 +206,10 @@ public class Member implements Serializable, Matchable<String> {
     return id;
   }
 
+  public double getOutstandingFines() {
+    return outstandingFines;
+  }
+
   /**
    * Setter for name
    *
@@ -212,7 +222,7 @@ public class Member implements Serializable, Matchable<String> {
   /**
    * Setter for address
    *
-   * @param newName member's new address
+   * @param newAddress member's new address
    */
   public void setAddress(String newAddress) {
     address = newAddress;
@@ -221,7 +231,7 @@ public class Member implements Serializable, Matchable<String> {
   /**
    * Setter for phone
    *
-   * @param newName member's new phone
+   * @param newPhone member's new phone
    */
   public void setPhone(String newPhone) {
     phone = newPhone;
@@ -230,7 +240,7 @@ public class Member implements Serializable, Matchable<String> {
   /**
    * Checks whether the member is equal to another Member
    *
-   * @param id of the member who should be compared
+   * @param object id of the member who should be compared
    * @return true iff the member ids match
    */
   @Override

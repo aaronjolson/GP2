@@ -42,6 +42,8 @@ public class Library implements Serializable {
   public static final int OPERATION_COMPLETED = 7;
   public static final int OPERATION_FAILED = 8;
   public static final int NO_SUCH_MEMBER = 9;
+  public static final int ITEM_HAS_HOLD_FINE = 10;
+  public static final int ITEM_HAS_FINE = 11;
 
   public static final int BOOK = 1;
   public static final int PERIODICAL = 2;
@@ -81,8 +83,7 @@ public class Library implements Serializable {
    * @param id     item id
    * @return the Book object created
    */
-  public LoanableItem addLoanableItem(int type, String title, String author,
-                                      String id) {
+  public LoanableItem addLoanableItem(int type, String title, String author, String id) {
     LoanableItem item = LoanableItemFactory.instance().createLoanableItem(
         type, title, author, id);
     if (catalog.insertLoanableItem(item)) {
@@ -225,6 +226,10 @@ public class Library implements Serializable {
     return (item);
   }
 
+  public void payFines(String memberId, double fineAmount){
+
+  }
+
   /**
    * Renews an item
    *
@@ -285,6 +290,31 @@ public class Library implements Serializable {
     return (OPERATION_FAILED);
   }
 
+  private boolean yearApart(Calendar date1, Calendar date2) {
+    return ((date2.getTimeInMillis() - date1.getTimeInMillis()) / 86400000) > 365;
+  }
+
+  private int daysElapsedSince(Calendar date) {
+    return (int) ((System.currentTimeMillis() - date.getTimeInMillis())/86400000);
+  }
+
+  public double computeFine(LoanableItem loanableItem){
+    double fine = 0.0;
+    Calendar dueDate = loanableItem.getDueDate();
+    if (System.currentTimeMillis() > dueDate.getTimeInMillis()) {
+      Calendar acquisitionDate = loanableItem.getAcquisitionDate();
+      if (yearApart(acquisitionDate, dueDate)) {
+        fine = 0.15 + 0.05 * daysElapsedSince(dueDate);
+      } else {
+        fine = 0.25 + 0.1 * daysElapsedSince(dueDate);
+      }
+      if (loanableItem.hasHold()) {
+        fine *= 2;
+      }
+    }
+    return fine;
+  }
+
   /**
    * Returns a single loanable item to the library
    *
@@ -292,6 +322,7 @@ public class Library implements Serializable {
    * @return a code representing the outcome
    */
   public int returnLoanableItem(String itemId) {
+    double fine;
     LoanableItem loanableItem = catalog.search(itemId);
     if (loanableItem == null) {
       return (ITEM_NOT_FOUND);
@@ -303,6 +334,16 @@ public class Library implements Serializable {
     if (!(member.returnItem(loanableItem))) {
       return (OPERATION_FAILED);
     }
+    fine = computeFine(loanableItem);
+    if (fine < 0) {
+      member.addFine(fine, loanableItem.getTitle());
+      if(loanableItem.hasHold()){
+        return(ITEM_HAS_HOLD_FINE);
+      } else {
+        return(ITEM_HAS_FINE);
+      }
+    }
+
     if (loanableItem.hasHold()) {
       return (ITEM_HAS_HOLD);
     }

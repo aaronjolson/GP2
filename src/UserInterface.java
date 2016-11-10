@@ -48,10 +48,11 @@ public class UserInterface {
   private static final int REMOVE_HOLD = 8;
   private static final int PROCESS_HOLD = 9;
   private static final int GET_TRANSACTIONS = 10;
-  private static final int SAVE = 11;
-  private static final int RETRIEVE = 12;
-  private static final int PRINT_FORMATTED = 13;
-  private static final int HELP = 14;
+  private static final int PAY_FINES = 11;
+  private static final int SAVE = 12;
+  private static final int RETRIEVE = 13;
+  private static final int PRINT_FORMATTED = 14;
+  private static final int HELP = 15;
 
   /**
    * Made private for singleton pattern. Conditionally looks for any saved
@@ -311,10 +312,16 @@ public class UserInterface {
           System.out.println("No such Book in Library");
           break;
         case Library.ITEM_NOT_ISSUED:
-          System.out.println(" Book  was not checked out");
+          System.out.println(" Book was not checked out");
           break;
         case Library.ITEM_HAS_HOLD:
           System.out.println("Book has a hold");
+          break;
+        case Library.ITEM_HAS_HOLD_FINE:
+          System.out.println("Book has a hold and is late. A fine has been charged");
+          break;
+        case Library.ITEM_HAS_FINE:
+          System.out.println("Book is late and a fine has been charged");
           break;
         case Library.OPERATION_FAILED:
           System.out.println("Book could not be returned");
@@ -461,6 +468,10 @@ public class UserInterface {
     }
   }
 
+  public void payFines() {
+
+  }
+
   /**
    * Method to be called for saving the Library object. Uses the appropriate
    * Library method for saving.
@@ -539,6 +550,9 @@ public class UserInterface {
           break;
         case GET_TRANSACTIONS:
           getTransactions();
+          break;
+        case PAY_FINES:
+          payFines();
           break;
         case SAVE:
           save();

@@ -25,8 +25,7 @@ import java.util.Calendar;
  *
  * @author Brahma Dathan and Sarnath Ramnath
  */
-public class Book extends LoanableItem implements Serializable,
-    Matchable<String> {
+public class Book extends LoanableItem implements Serializable, Matchable<String> {
   private static final long serialVersionUID = 1L;
   private String author;
 
