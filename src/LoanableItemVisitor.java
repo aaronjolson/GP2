@@ -28,24 +28,21 @@ public interface LoanableItemVisitor {
 	 * This is the method for catching all LoanableItem objects that may be
 	 * added in the future.
 	 * 
-	 * @param item
-	 *            the item to be processed
+	 * @param item the item to be processed
 	 */
 	public void visit(LoanableItem item);
 
 	/**
 	 * This method processes Book objects
 	 * 
-	 * @param book
-	 *            the Book to be processed
+	 * @param book the Book to be processed
 	 */
 	public void visit(Book book);
 
 	/**
 	 * The method processes Periodical objects
 	 * 
-	 * @param periodical
-	 *            the Periodical to be processed
+	 * @param periodical the Periodical to be processed
 	 */
 	public void visit(Periodical periodical);
 }
