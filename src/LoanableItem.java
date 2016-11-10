@@ -56,7 +56,7 @@ public abstract class LoanableItem implements Matchable<String>, Serializable {
    * Issues the item to the member
    *
    * @param member The member to whom the item should be issued
-   * @return true iff the operations is syuccessful
+   * @return true iff the operations is successful
    */
   public boolean issue(Member member) {
     if (borrowedBy != null) {

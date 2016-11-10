@@ -62,9 +62,9 @@ public class Catalog extends ItemList<LoanableItem, String> {
   }
 
   /**
-   * Inserts a book into the collection
+   * Inserts a LoanableItem into the collection
    *
-   * @param book the book to be inserted
+   * @param loanableItem the book to be inserted
    * @return true iff the book could be inserted. Currently always true
    */
   public boolean insertLoanableItem(LoanableItem loanableItem) {
