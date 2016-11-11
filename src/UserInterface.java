@@ -482,7 +482,18 @@ public class UserInterface {
   }
 
   public void removeMember() {
-
+    String memberID = getToken("Enter member id");
+    int result = library.removeMember(memberID);
+    switch (result) {
+      case Library.NO_SUCH_MEMBER:
+        System.out.println("Not a valid member ID");
+        break;
+      case Library.OPERATION_COMPLETED:
+        System.out.println("The member has been removed");
+        break;
+      default:
+        System.out.println("An error has occurred");
+    }
   }
 
   /**
